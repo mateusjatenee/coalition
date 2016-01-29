@@ -1,19 +1,19 @@
 <template>
 
-<form>
+<form v-on:submit.prevent="sendForm">
   <div class="form-group">
     <label>Product name</label>
-    <input type="text" class="form-control" placeholder="Product name">
+    <input type="text" class="form-control" placeholder="Product name" v-model="productData.name">
   </div>
   <div class="form-group">
     <label>Quantity in stock</label>
-    <input type="text" class="form-control" placeholder="Quantity in stock">
+    <input type="text" class="form-control" placeholder="Quantity in stock" v-model="productData.qty">
   </div>
   <div class="form-group">
   <label>Price per item</label>
-  <input type="text" class="form-control" placeholder="Price per Item">
+  <input type="text" class="form-control" placeholder="Price per Item" v-model="productData.price">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-lg btn-success" v-on:click.prevent="sendForm">Submit</button>
 </form>
 
 <h1>Products list</h1>

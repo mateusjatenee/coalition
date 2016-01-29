@@ -11501,7 +11501,7 @@ exports.default = {
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<form>\n  <div class=\"form-group\">\n    <label>Product name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Product name\">\n  </div>\n  <div class=\"form-group\">\n    <label>Quantity in stock</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Quantity in stock\">\n  </div>\n  <div class=\"form-group\">\n  <label>Price per item</label>\n  <input type=\"text\" class=\"form-control\" placeholder=\"Price per Item\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n</form>\n\n<h1>Products list</h1>\n\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<form v-on:submit.prevent=\"sendForm\">\n  <div class=\"form-group\">\n    <label>Product name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Product name\" v-model=\"productData.name\">\n  </div>\n  <div class=\"form-group\">\n    <label>Quantity in stock</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Quantity in stock\" v-model=\"productData.qty\">\n  </div>\n  <div class=\"form-group\">\n  <label>Price per item</label>\n  <input type=\"text\" class=\"form-control\" placeholder=\"Price per Item\" v-model=\"productData.price\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-lg btn-success\" v-on:click.prevent=\"sendForm\">Submit</button>\n</form>\n\n<h1>Products list</h1>\n\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
