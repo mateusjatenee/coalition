@@ -18,6 +18,27 @@
 
 <h1>Products list</h1>
 
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Final price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr v-for="product in products">
+			<td>{{ product.id }}</td>
+			<td>{{ product.name }}</td>
+			<td>{{ product.qty }}</td>
+			<td>{{ product.price }}</td>
+			<td>{{ product.qty * product.price }}</td>
+		</tr>
+	</tbody>
+</table>
+
 
 </template>
 
@@ -35,6 +56,10 @@ export default {
 		}
 	},
 
+	created() {
+		this.getProducts();
+	},
+
 	methods: {
 		sendForm() {
 			var resource = this.$resource('api/products');
@@ -44,6 +69,16 @@ export default {
 			}, function(response) {
 				console.log(response);
 				this.loading = false;
+			});
+		},
+
+		getProducts() {
+			var resource = this.$resource('api/products');
+			resource.get().then(function(response) {
+				console.log(response);
+				this.$set('products', response.data);
+			}, function(response) {
+				console.log(response);
 			});
 		}
 	}

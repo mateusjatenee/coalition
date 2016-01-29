@@ -11486,6 +11486,9 @@ exports.default = {
 			loading: false
 		};
 	},
+	created: function created() {
+		this.getProducts();
+	},
 
 	methods: {
 		sendForm: function sendForm() {
@@ -11497,11 +11500,20 @@ exports.default = {
 				console.log(response);
 				this.loading = false;
 			});
+		},
+		getProducts: function getProducts() {
+			var resource = this.$resource('api/products');
+			resource.get().then(function (response) {
+				console.log(response);
+				this.$set('products', response.data);
+			}, function (response) {
+				console.log(response);
+			});
 		}
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<form v-on:submit.prevent=\"sendForm\">\n  <div class=\"form-group\">\n    <label>Product name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Product name\" v-model=\"productData.name\">\n  </div>\n  <div class=\"form-group\">\n    <label>Quantity in stock</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Quantity in stock\" v-model=\"productData.qty\">\n  </div>\n  <div class=\"form-group\">\n  <label>Price per item</label>\n  <input type=\"text\" class=\"form-control\" placeholder=\"Price per Item\" v-model=\"productData.price\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-lg btn-success\" v-on:click.prevent=\"sendForm\">Submit</button>\n</form>\n\n<h1>Products list</h1>\n\n\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<form v-on:submit.prevent=\"sendForm\">\n  <div class=\"form-group\">\n    <label>Product name</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Product name\" v-model=\"productData.name\">\n  </div>\n  <div class=\"form-group\">\n    <label>Quantity in stock</label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"Quantity in stock\" v-model=\"productData.qty\">\n  </div>\n  <div class=\"form-group\">\n  <label>Price per item</label>\n  <input type=\"text\" class=\"form-control\" placeholder=\"Price per Item\" v-model=\"productData.price\">\n  </div>\n  <button type=\"submit\" class=\"btn btn-lg btn-success\" v-on:click.prevent=\"sendForm\">Submit</button>\n</form>\n\n<h1>Products list</h1>\n\n<table class=\"table table-striped\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>#</th>\n\t\t\t<th>Name</th>\n\t\t\t<th>Quantity</th>\n\t\t\t<th>Price</th>\n\t\t\t<th>Final price</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr v-for=\"product in products\">\n\t\t\t<td>{{ product.id }}</td>\n\t\t\t<td>{{ product.name }}</td>\n\t\t\t<td>{{ product.qty }}</td>\n\t\t\t<td>{{ product.price }}</td>\n\t\t\t<td>{{ product.qty * product.price }}</td>\n\t\t</tr>\n\t</tbody>\n</table>\n\n\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
