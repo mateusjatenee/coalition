@@ -66,6 +66,8 @@ export default {
 			this.loading =  true;
 			resource.save(this.productData).then(function(response) {
 				this.loading = false;
+				console.log(response);
+				this.products.push(response);
 			}, function(response) {
 				console.log(response);
 				this.loading = false;
