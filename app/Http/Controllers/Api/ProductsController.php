@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -14,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return Product::latest()->get();
     }
 
     /**
@@ -35,7 +37,14 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $this->validate($request, [
+            'name' => 'required',
+            'qty' => 'required',
+            'price' => 'required',
+        ]);
+
+        $product = Product::create($request->all());
+        return $product;
     }
 
     /**

@@ -39,7 +39,7 @@ export default {
 		sendForm() {
 			var resource = this.$resource('api/products');
 			this.loading =  true;
-			resource.save({product: this.productData}).then(function(response) {
+			resource.save(this.productData).then(function(response) {
 				this.loading = false;
 			}, function(response) {
 				console.log(response);
